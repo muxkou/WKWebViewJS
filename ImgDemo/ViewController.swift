@@ -38,13 +38,9 @@ class ViewController: UIViewController,WKScriptMessageHandler,WKNavigationDelega
     func installWKView() {
 
         let configuration = WKWebViewConfiguration()
-//        configuration.preferences.javaScriptEnabled= false
         webView = WKWebView(frame: CGRect(x: 0, y: 30, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/2), configuration: configuration)
         webView.navigationDelegate = self
         self.view.addSubview(webView)
-        
-        //webView.load(request)
-        //webView.load(URLRequest(url: URL(string: htmlUrl)!))
         let path = downloadAndSvaeFile(downLoadFromURL: NSURL(string: self.htmlUrl)!, fileName: "/index.html")
         webView.load(URLRequest(url: URL(fileURLWithPath: path)))
     }
@@ -53,6 +49,7 @@ class ViewController: UIViewController,WKScriptMessageHandler,WKNavigationDelega
         self.imgFilePath = downloadAndSvaeFile(downLoadFromURL: NSURL(string: self.igmDownloadUrl)!, fileName: "/test.png")
     }
     
+    /// 当webview加载完成后调用
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("finish")
         let path = Bundle.main.path(forResource: "loading", ofType: ".png")
